@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProctorAI</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #27ae60;
+      --background: #f8f9fa;
+      --card-bg: #fff;
+      --shadow: 0 8px 32px rgba(44,62,80,0.15);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--primary), #1a2530 60%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .title {
+      color: #fff;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 16px rgba(44,62,80,0.2);
+    }
+    .subtitle {
+      color: #ecf0f1;
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+    .card-container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      width: 320px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 1.5rem;
+    }
+    .card:focus,
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 16px 48px rgba(44,62,80,0.22);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 1.2rem 0 0.7rem 0;
+      color: var(--primary);
+    }
+    .card-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.7rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(39,174,96,0.08);
+    }
+    .card-btn:hover, .card-btn:focus {
+      background: #219653;
+    }
+    @media (max-width: 700px) {
+      .card-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .card {
+        width: 90vw;
+        max-width: 340px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="title">Proctor<span style="color: #27ae60;">AI</span></div>
+  <div class="subtitle">Ethical and Effective Hiring Solutions</div>
+  <div class="card-container">
+    <!-- Login Card -->
+    <a href="login.html" class="card" tabindex="0" aria-label="Login to your account">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Login illustration">
+      <div class="card-title">Login</div>
+      <button class="card-btn" type="button">Go to Login</button>
+    </a>
+    <!-- Sign Up Card -->
+    <a href="signup.html" class="card" tabindex="0" aria-label="Create a new account">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Sign up illustration">
+      <div class="card-title">Sign Up</div>
+      <button class="card-btn" type="button">Create Account</button>
+    </a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assessment - ProctorAI</title>
+  <style>
+    body { background: #eaf2fb; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: #222;}
+    .container { max-width: 900px; margin: 2rem auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(44,62,80,0.08); padding: 2rem;}
+    .row { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;}
+    .card { background: #f6fafd; border-radius: 10px; box-shadow: 0 1px 5px rgba(44,62,80,0.03); padding: 1.5rem 1.2rem; min-width: 260px; flex: 1 1 260px;}
+    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;}
+    .check-btn { background: #222e3a; color: #fff; border: none; padding: 0.7rem 2rem; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer;}
+    .check-btn:disabled { background: #ccc; cursor: not-allowed;}
+    .system-check-list { list-style: none; padding: 0; margin: 0;}
+    .system-check-list li { margin-bottom: 0.5rem;}
+    .profile { display: flex; justify-content: space-around; margin-top: 2rem; }
+    .profile-card { background: #f6fafd; border-radius: 10px; padding: 1rem 2rem; text-align: center;}
+    .profile-card span { display: block; font-size: 1.1rem; color: #888;}
+    .profile-card strong { font-size: 1.3rem; color: #2563eb;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to Your Assessment</h2>
+    <div class="row">
+      <div class="card">
+        <div class="card-title">Your Test Details</div>
+        <div id="testDetails">
+  <strong id="testTitle">Loading...</strong><br>
+  <span id="testDateTime"></span><br>
+  <span id="testDuration"></span>
+</div>
+
+        <button id="startTestBtn" class="check-btn" disabled>Start Test</button>
+      </div>
+      <div class="card">
+        <div class="card-title">System Check</div>
+        <p>Make sure your setup is ready for the test:</p>
+        <ul class="system-check-list">
+          <li><input type="checkbox" id="cam" disabled> <label id="cam-label">Camera Access</label></li>
+          <li><input type="checkbox" id="mic" disabled> <label id="mic-label">Microphone Access</label></li>
+          <li><input type="checkbox" id="net" disabled> <label id="net-label">Internet Connection</label></li>
+        </ul>
+        <!-- ✅ Camera preview (live feed) -->
+<video id="videoPreview" width="280" height="200" autoplay playsinline style="margin-top: 10px; border-radius: 10px; display: none;"></video>
+
+        <div id="mic-test-message" style="margin-top: 8px; display: none; color: #444;"></div>
+        <div id="system-status" style="margin-top: 1rem; font-weight: bold;"></div>
+        <button id="checkSystemBtn" class="check-btn">Check My System</button>
+      </div>
+    </div>
+    <div class="profile">
+      <div class="profile-card">
+        <strong>5</strong>
+        <span>Tests Taken</span>
+      </div>
+      <div class="profile-card">
+        <strong>85%</strong>
+        <span>Average Score</span>
+      </div>
+      <div class="profile-card">
+        <strong>4</strong>
+        <span>Passed Tests</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Script goes here -->
+  <script>
+    function checkInternetAccess() {
+      const isOnline = navigator.onLine;
+      const netLabel = document.getElementById('net-label');
+      document.getElementById('net').checked = isOnline;
+      netLabel.style.color = isOnline ? "" : "red";
+      if (!isOnline) alert("❌ No internet connection detected.");
+      return isOnline;
+    }
+
+    async function checkCameraAccess() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+const video = document.getElementById('videoPreview');
+video.srcObject = stream;
+video.style.display = 'block';
+
+        document.getElementById('cam').checked = true;
+        document.getElementById('cam-label').style.color = "";
+        return true;
+      } catch {
+        alert("📷 Camera access denied.");
+        document.getElementById('cam').checked = false;
+        document.getElementById('cam-label').style.color = "red";
+        return false;
+      }
+    }
+
+    async function checkMicrophoneAccessAndInput() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const micSource = audioContext.createMediaStreamSource(stream);
+        analyser.fftSize = 512;
+        micSource.connect(analyser);
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        const micMsg = document.getElementById('mic-test-message');
+        micMsg.style.display = "block";
+        micMsg.textContent = "🔊 Speak into your microphone...";
+
+        return new Promise(resolve => {
+          let detected = false;
+          const timeout = setTimeout(() => {
+            if (!detected) {
+              alert("🎤 No sound detected from microphone.");
+              document.getElementById('mic').checked = false;
+              document.getElementById('mic-label').style.color = "red";
+              micMsg.style.display = "none";
+              stream.getTracks().forEach(t => t.stop());
+              resolve(false);
+            }
+          }, 4000);
+
+          const check = () => {
+            analyser.getByteFrequencyData(dataArray);
+            const volume = dataArray.reduce((a, b) => a + b, 0);
+            if (volume > 500) {
+              clearTimeout(timeout);
+              document.getElementById('mic').checked = true;
+              document.getElementById('mic-label').style.color = "";
+              micMsg.style.display = "none";
+              stream.getTracks().forEach(t => t.stop());
+              resolve(true);
+            } else {
+              requestAnimationFrame(check);
+            }
+          };
+          check();
+        });
+      } catch {
+        alert("🎤 Microphone access denied.");
+        document.getElementById('mic').checked = false;
+        document.getElementById('mic-label').style.color = "red";
+        document.getElementById('mic-test-message').style.display = "none";
+        return false;
+      }
+    }
+window.onload = function () {
+  const test = JSON.parse(localStorage.getItem('scheduledTest'));
+  if (test) {
+    document.getElementById('testTitle').innerText = test.title || "Untitled Test";
+    document.getElementById('testDateTime').innerText = `${test.date || 'N/A'} • ${test.time || 'N/A'}`;
+    document.getElementById('testDuration').innerText = `Duration: ${test.duration || 0} minutes`;
+  } else {
+    document.getElementById('testTitle').innerText = "❌ No test found";
+    document.getElementById('testDateTime').innerText = "Please create one in the admin portal.";
+    document.getElementById('startTestBtn').disabled = true;
+  }
+};
+
+    document.getElementById('checkSystemBtn').onclick = async () => {
+      document.getElementById('system-status').textContent = "";
+      document.getElementById('startTestBtn').disabled = true;
+
+      const internet = checkInternetAccess();
+      const camera = await checkCameraAccess();
+      const mic = await checkMicrophoneAccessAndInput();
+
+      if (internet && camera && mic) {
+        document.getElementById('system-status').textContent = "✅ System check passed!";
+        document.getElementById('system-status').style.color = "green";
+        document.getElementById('startTestBtn').disabled = false;
+        alert("✅ System check passed! You can now start the test.");
+      } else {
+        document.getElementById('system-status').textContent = "❌ System check failed.";
+        document.getElementById('system-status').style.color = "red";
+      }
+    };
+
+    document.getElementById('startTestBtn').onclick = () => {
+      window.location.href = 'test.html';
+    };
+  </script>
+</body>
+</html>

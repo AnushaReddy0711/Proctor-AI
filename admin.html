@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - ProctorAI</title>
+  <style>
+    body { background: #eaf2fb; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: #222;}
+    .container { max-width: 1100px; margin: 2rem auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(44,62,80,0.08); padding: 2rem;}
+    .back { margin-bottom: 1rem; }
+    .back button { background: #fff; color: #222; border: 1px solid #ddd; padding: 0.5rem 1.2rem; border-radius: 6px; cursor: pointer; }
+    h2 { margin-bottom: 2rem; }
+    .dashboard-row { display: flex; gap: 1.5rem; flex-wrap: wrap;}
+    .dashboard-card { background: #f6fafd; border-radius: 10px; padding: 1.5rem 2rem; min-width: 200px; flex: 1 1 200px; text-align: center;}
+    .dashboard-card strong { font-size: 1.6rem; color: #2563eb;}
+    .dashboard-card span { display: block; color: #888; font-size: 1rem;}
+    .recent-tests { margin-top: 2.5rem;}
+    .recent-tests-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;}
+    .test-list { list-style: none; padding: 0;}
+    .test-item { background: #f6fafd; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;}
+    .test-info { flex: 1;}
+    .test-info strong { font-size: 1.1rem; color: #222;}
+    .test-info span { color: #555; font-size: 0.98rem; margin-left: 0.5rem;}
+    .test-status { font-weight: 600; border-radius: 6px; padding: 0.2rem 0.9rem; margin-right: 1rem;}
+    .completed { background: #e0f7e9; color: #27ae60;}
+    .progress { background: #fffbe0; color: #e2b007;}
+    .test-score { font-weight: 700; color: #2563eb;}
+    .view-btn { background: #fff; color: #222; border: 1px solid #ddd; border-radius: 5px; padding: 0.4rem 1.2rem; cursor: pointer;}
+    .create-btn { float: right; background: #2563eb; color: #fff; border: none; border-radius: 7px; padding: 0.7rem 1.7rem; font-size: 1rem; font-weight: 600; margin-bottom: 1rem;}
+    .create-btn:hover { background: #174ea6;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back"><button onclick="window.location.href='homepage.html'">&larr; Back to Home</button></div>
+    <h2>Admin Dashboard</h2>
+    <button class="create-btn" id="createTestBtn">+ Create New Test</button>
+    <div class="dashboard-row">
+      <div class="dashboard-card">
+        <strong>156</strong>
+        <span>Total Tests</span>
+        <span style="color:#27ae60;">+12 from last week</span>
+      </div>
+      <div class="dashboard-card">
+        <strong>24</strong>
+        <span>Active Candidates</span>
+        <span style="color:#27ae60;">+3 currently testing</span>
+      </div>
+      <div class="dashboard-card">
+        <strong>8</strong>
+        <span>Completed Today</span>
+        <span style="color:#27ae60;">+2 from yesterday</span>
+      </div>
+      <div class="dashboard-card">
+        <strong>78%</strong>
+        <span>Average Score</span>
+        <span style="color:#27ae60;">+5% from last month</span>
+      </div>
+    </div>
+    <div class="recent-tests">
+      <div class="recent-tests-title">Recent Test Results</div>
+      <ul class="test-list">
+        <li class="test-item">
+          <div class="test-info">
+            <strong>John Smith</strong> <span>Frontend Developer</span> <span>2024-01-20</span>
+          </div>
+          <span class="test-score">85%</span>
+          <span class="test-status completed">Completed</span>
+          <button class="view-btn">View</button>
+        </li>
+        <li class="test-item">
+          <div class="test-info">
+            <strong>Sarah Johnson</strong> <span>Backend Developer</span> <span>2024-01-20</span>
+          </div>
+          <span class="test-score">--</span>
+          <span class="test-status progress">In Progress</span>
+          <button class="view-btn">View</button>
+        </li>
+        <li class="test-item">
+          <div class="test-info">
+            <strong>Mike Wilson</strong> <span>Full Stack Developer</span> <span>2024-01-19</span>
+          </div>
+          <span class="test-score">72%</span>
+          <span class="test-status completed">Completed</span>
+          <button class="view-btn">View</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    document.getElementById('createTestBtn').onclick = function() {
+window.location.href = 'createtest.html';
+    };
+  </script>
+</body>
+</html>

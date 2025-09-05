@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Test - Admin Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background: #eaf2fb; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: #222;}
+    .container { max-width: 700px; margin: 2rem auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(44,62,80,0.08); padding: 2rem;}
+    h2 { text-align: center; margin-bottom: 2rem; }
+    label { display: block; margin-top: 1.2rem; font-weight: 500; }
+    input, textarea, select { width: 100%; padding: 0.7rem; margin-top: 0.5rem; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
+    .questions { margin-top: 1.5rem; }
+    .question-block { background: #f6fafd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .remove-btn { background: #ff5757; color: #fff; border: none; border-radius: 4px; padding: 0.3rem 0.8rem; cursor: pointer; float: right;}
+    .add-btn, .submit-btn { background: #2563eb; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 2rem; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 1.5rem;}
+    .add-btn { background: #22c55e; margin-bottom: 1rem;}
+    .submit-btn { display: block; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create & Schedule New Test</h2>
+    <form id="testForm">
+      <label for="testTitle">Test Title</label>
+      <input type="text" id="testTitle" name="testTitle" required>
+
+      <label for="testDesc">Test Description</label>
+      <textarea id="testDesc" name="testDesc" rows="3"></textarea>
+
+      <label for="testDate">Schedule Date</label>
+      <input type="date" id="testDate" name="testDate" required>
+
+      <label for="testTime">Schedule Time</label>
+      <input type="time" id="testTime" name="testTime" required>
+
+      <label for="testDuration">Duration (minutes)</label>
+      <input type="number" id="testDuration" name="testDuration" min="1" required>
+
+      <div class="questions" id="questionsSection">
+        <label>Questions</label>
+        <!-- Questions will be added here dynamically -->
+      </div>
+
+      <button type="button" class="add-btn" onclick="addQuestion()">+ Add Question</button>
+      <button type="submit" class="submit-btn">Create Test</button>
+    </form>
+  </div>
+
+  <script>
+    let questionCount = 0;
+
+    function addQuestion() {
+      questionCount++;
+      const questionsSection = document.getElementById('questionsSection');
+      const div = document.createElement('div');
+      div.className = 'question-block';
+      div.id = `question-${questionCount}`;
+``
+
+      div.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeQuestion('${div.id}')">Remove</button>
+        <label>Question</label>
+        <input type="text" name="questionText${questionCount}" required>
+        <label>Option A</label>
+        <input type="text" name="optionA${questionCount}" required>
+        <label>Option B</label>
+        <input type="text" name="optionB${questionCount}" required>
+        <label>Option C</label>
+        <input type="text" name="optionC${questionCount}" required>
+        <label>Option D</label>
+        <input type="text" name="optionD${questionCount}" required>
+        <label>Correct Answer</label>
+        <select name="correct${questionCount}" required>
+          <option value="">Select</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+        </select>
+      `;
+      questionsSection.appendChild(div);
+    }
+
+    function removeQuestion(id) {
+      const elem = document.getElementById(id);
+      if (elem) elem.remove();
+    }
+
+    document.getElementById('testForm').onsubmit = function(e) {
+      e.preventDefault();
+      alert('✅ Test created and scheduled successfully!');
+      // Optionally, save form data here
+      window.close(); // Close the tab or redirect if needed
+    };
+
+    // Automatically add one question on page load
+    addQuestion();
+  </script>
+</body>
+</html>

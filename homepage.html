@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProctorAI - Home</title>
+  <style>
+    body {
+      background: #f8fafc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      color: #222;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 2rem 2rem 1rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo img {
+      width: 48px;
+      height: 48px;
+    }
+    .logo-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+    .tagline {
+      margin-left: 12px;
+      font-size: 1.1rem;
+      color: #27ae60;
+      font-weight: 500;
+    }
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 2rem 1rem;
+    }
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    .hero-highlight {
+      color: #27ae60;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+    }
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .hero-btn {
+      padding: 0.9rem 2.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #174ea6;
+    }
+    .btn-outline {
+      background: #fff;
+      color: #27ae60;
+      border: 2px solid #27ae60;
+    }
+    .btn-outline:hover {
+      background: #e9f9f1;
+    }
+    .features {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(44,62,80,0.06);
+      padding: 1.5rem 1.3rem;
+      min-width: 260px;
+      max-width: 320px;
+      flex: 1 1 260px;
+      margin: 0.5rem;
+    }
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feature-desc {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .feature-list li {
+      color: #27ae60;
+      margin-bottom: 0.3rem;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .feature-list li:before {
+      content: "✔";
+      color: #27ae60;
+      font-weight: bold;
+      margin-right: 0.3rem;
+    }
+    @media (max-width: 900px) {
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="https://img.icons8.com/fluency/48/000000/shield.png" alt="ProctorAI logo">
+      <span class="logo-title">ProctorAI</span>
+    </div>
+    <span class="tagline">Ethical Hiring Solutions</span>
+  </div>
+  <div class="hero">
+    <div class="hero-title">Simple &amp; Effective <span class="hero-highlight">Online Assessment Platform</span></div>
+    <div class="hero-desc">
+      Built for hackathons! A beginner-friendly platform for conducting secure online assessments with real-time monitoring and easy-to-understand code structure.
+    </div>
+    <div class="hero-btns">
+      <button class="hero-btn btn-primary" onclick="window.location.href='assessment.html'">Take a Test (Candidate View)</button>
+      <button class="hero-btn btn-outline" onclick="window.location.href='admin.html'">Admin Dashboard</button>
+    </div>
+  </div>
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-title"><span>🛡️</span> Secure Testing</div>
+      <div class="feature-desc">Basic webcam monitoring and secure test environment for fair assessments</div>
+      <ul class="feature-list">
+        <li>Webcam recording</li>
+        <li>Time-limited tests</li>
+        <li>Question navigation</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title"><span>📊</span> Easy Analytics</div>
+      <div class="feature-desc">Simple dashboard to view test results and candidate performance</div>
+      <ul class="feature-list">
+        <li>Score tracking</li>
+        <li>Progress monitoring</li>
+        <li>Simple reports</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title"><span>⚡</span> Quick Setup</div>
+      <div class="feature-desc">Beginner-friendly code structure perfect for hackathon development</div>
+      <ul class="feature-list">
+        <li>Clear code comments</li>
+        <li>Simple components</li>
+        <li>Easy to customize</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+  // Get role from localStorage
+  const role = localStorage.getItem('userRole');
+
+  // Hide both buttons/sections by default
+  document.addEventListener('DOMContentLoaded', function() {
+    const heroTitle = document.querySelector('.hero-title');
+    const heroBtns = document.querySelector('.hero-btns');
+    const features = document.querySelector('.features');
+    const adminBtn = heroBtns.querySelector('.btn-outline');
+    const studentBtn = heroBtns.querySelector('.btn-primary');
+
+    if (role === 'admin') {
+      // Show only admin dashboard
+      heroTitle.textContent = 'Admin Dashboard';
+      adminBtn.style.display = 'inline-block';
+      studentBtn.style.display = 'none';
+      features.style.display = 'none'; // Optionally hide features for admin
+    } else if (role === 'student') {
+      // Show only student portal
+      heroTitle.textContent = 'Student Portal';
+      studentBtn.style.display = 'inline-block';
+      adminBtn.style.display = 'none';
+      // features.style.display = ''; // Show features if you want
+    } else {
+      // If no role, show both (for direct access or demo)
+      heroTitle.textContent = 'Simple & Effective Online Assessment Platform';
+      adminBtn.style.display = 'inline-block';
+      studentBtn.style.display = 'inline-block';
+      features.style.display = '';
+    }
+  });
+</script>
+
+</body>
+</html>
+
+  
